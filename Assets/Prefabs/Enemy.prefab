@@ -233,8 +233,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingOrigin: {fileID: 6177510331178208824}
   projectilePrefab: {fileID: 8593908545900021710, guid: 927213692f5dd4b4f871d0c08b545d91, type: 3}
-  firingInterval: 2
-  playerInRange: 0
+  firingInterval: 1
+  firingProximity: 50
+  projectileSpeed: 500
+  player: {fileID: 0}
 --- !u!1 &3328994282935972469
 GameObject:
   m_ObjectHideFlags: 0
