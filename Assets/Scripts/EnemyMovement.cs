@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private GameObject player = null;
+    [SerializeField] private float rotateSpeed = 0.4f;
 
     private NavMeshAgent agent;
 
@@ -17,5 +18,14 @@ public class EnemyMovement : MonoBehaviour
     private void Update()
     {
         agent.SetDestination(player.transform.position);
+        FaceTarget(player.transform.position);
+    }
+
+    private void FaceTarget(Vector3 destination)
+    {
+        Vector3 lookPos = destination - transform.position;
+        lookPos.y = 0;
+        Quaternion rotation = Quaternion.LookRotation(lookPos);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotateSpeed);
     }
 }
