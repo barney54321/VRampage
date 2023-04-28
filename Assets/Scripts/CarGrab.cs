@@ -22,24 +22,10 @@ public class CarGrab : MonoBehaviour
 
     public void OnGrab()
     {
-        scale = transform.localScale;
-        transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        GetComponent<Rigidbody>().isKinematic = true;
-        GetComponent<Rigidbody>().useGravity = false;
-        GetComponent<BoxCollider>().enabled = false;
     }
 
     public void OffGrab()
     {
-        StartCoroutine()
-    }
-
-    IEnumerator Delayed()
-    {
-        yield return new WaitForSeconds(0.5f);
-        transform.localScale = scale;
-        GetComponent<Rigidbody>().isKinematic = false;
-        GetComponent<BoxCollider>().enabled = true;
-        GetComponent<Rigidbody>().useGravity = true;
+        // StartCoroutine()
     }
 }
