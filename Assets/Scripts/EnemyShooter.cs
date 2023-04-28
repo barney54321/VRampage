@@ -12,6 +12,8 @@ public class EnemyShooter : MonoBehaviour
     [SerializeField] private float projectileSpeed = 10f;
     [SerializeField] private GameObject player = null;
 
+    private AudioSource audio;
+
     private bool playerInRange = false;
     private float firingTimer;
 
@@ -20,6 +22,7 @@ public class EnemyShooter : MonoBehaviour
     private void Start()
     {
         firingTimer = firingInterval;
+        audio = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -60,6 +63,7 @@ public class EnemyShooter : MonoBehaviour
         projectile.transform.LookAt(player.transform, Vector3.up);
         Vector3 dir = player.transform.position - projectile.transform.position;
         projectile.GetComponent<Rigidbody>().AddForce(dir * projectileSpeed);
+        audio.Play();
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -25,6 +26,11 @@ public class EnemySpawner : MonoBehaviour
             enemyInstance.GetComponent<EnemyMovement>().SetPlayer(player);
             enemyInstance.GetComponent<EnemyShooter>().SetPlayer(player);
             timer = spawnInterval;
+        }
+
+        if (Input.GetKeyDown("space"))
+        {
+            SceneManager.LoadScene("Menu");
         }
     }
 }

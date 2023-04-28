@@ -6,10 +6,13 @@ public class SessionTimer : MonoBehaviour
 {
     [SerializeField] private float sessionTime = 30f;
 
+    public GameObject win;
+
+    public static bool haveWon = false;
+
     private float timeRemaining;
 
     public static Action<float> onTimeUpdate;
-    public static Action onFinish;
 
     private void Start()
     {
@@ -19,13 +22,17 @@ public class SessionTimer : MonoBehaviour
 
     private void Update()
     {
-        timeRemaining -= Time.deltaTime;
-        if (timeRemaining < 0f)
+        if (timeRemaining >= 0f)
         {
-            Debug.Log("YOU WON!");
-            onFinish?.Invoke();
-        }
+            timeRemaining -= Time.deltaTime;
+            if (timeRemaining < 0f && PlayerHealthScript.health > 0)
+            {
+                win.SetActive(true);
+                haveWon = true;
+                PlayerHealthScript.win = true;
+            }
 
-        onTimeUpdate?.Invoke(timeRemaining);
+            onTimeUpdate?.Invoke(timeRemaining);
+        }
     }
 }
