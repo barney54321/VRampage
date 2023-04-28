@@ -18,7 +18,12 @@ public class EnemyMovement : MonoBehaviour
     private void Update()
     {
         agent.SetDestination(player.transform.position);
-        FaceTarget(player.transform.position);
+        //FaceTarget(player.transform.position);
+    }
+
+    public void SetPlayer(GameObject p)
+    {
+        player = p;
     }
 
     private void FaceTarget(Vector3 destination)

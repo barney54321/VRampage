@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class EnemyShooter : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class EnemyShooter : MonoBehaviour
 
     private bool playerInRange = false;
     private float firingTimer;
+
+    public static Action onEnemyKilled;
 
     private void Start()
     {
@@ -33,6 +36,12 @@ public class EnemyShooter : MonoBehaviour
         }
     }
 
+    public void SetPlayer(GameObject p)
+    {
+        player = p;
+    }
+
+
     private void CheckIfPlayerInRange()
     {
         if (Vector3.Distance(transform.position, player.transform.position) <= firingProximity)
@@ -51,5 +60,14 @@ public class EnemyShooter : MonoBehaviour
         projectile.transform.LookAt(player.transform, Vector3.up);
         Vector3 dir = player.transform.position - projectile.transform.position;
         projectile.GetComponent<Rigidbody>().AddForce(dir * projectileSpeed);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Car"))
+        {
+            onEnemyKilled?.Invoke();
+            Destroy(gameObject);
+        }
     }
 }
